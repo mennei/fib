@@ -12,3 +12,7 @@
 .Fib > div {
     padding: 5px;
 }
+
+.Error {
+    color: red;
+}

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import './FibComponent.css';
 import axios from '../axios';
-import {resolve} from 'url';
 
 class FibComponent extends Component {
   state = {
     input: 0,
     result: 0,
+    errorMsg: '',
   };
 
   inputOnChangeHandler = event => {
@@ -20,9 +20,14 @@ class FibComponent extends Component {
     axios
       .get (`/fib/calc?n=${this.state.input}`, config)
       .then (response => {
-        this.setState ({result: response.data});
+        this.setState ({result: response.data, errorMsg: ''});
       })
-      .catch (error => console.log (error));
+      .catch (error => {
+        this.setState ({
+          result: 0,
+          errorMsg: 'Invalid Input! Only decimal and less then 93 support.',
+        });
+      });
   };
 
   textareaOnChangeHandler = event => {
@@ -44,6 +49,7 @@ class FibComponent extends Component {
             onChange={this.textareaOnChangeHandler}
           />
         </div>
+        <div className="Error">{this.state.errorMsg}</div>
       </div>
     );
   }
