@@ -20,7 +20,6 @@ class FibComponent extends Component {
     axios
       .get (`/fib/calc?n=${this.state.input}`, config)
       .then (response => {
-        console.log (response);
         this.setState ({result: response.data});
       })
       .catch (error => console.log (error));
